@@ -1,0 +1,95 @@
+:root {
+    --footer-accent: hsla(202, 100%, 50%, 0.547);
+    --background-gradient-start: rgba(16, 26, 84, 0.529);
+    --background-gradient-middle: rgba(7, 27, 75, 0.377);
+    --background-gradient-end: rgba(15, 88, 110, 0.5);
+}
+
+@keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes wave {
+    0%, 100% { transform: translate3d(-2px, 0px, 0) rotate(-2deg); }
+    25% { transform: translate3d(1px, 3px, 0) rotate(2deg); }
+    50% { transform: translate3d(2px, -2px, 0) rotate(-1deg); }
+    75% { transform: translate3d(-1px, 2px, 0) rotate(1deg); }
+}
+
+@keyframes waveTop {
+    0%, 100% { transform: translate3d(0, -2px, 0); }
+    25% { transform: translate3d(0, 2px, 0); }
+    50% { transform: translate3d(0, -1px, 0); }
+    75% { transform: translate3d(0, 1px, 0); }
+}
+
+@keyframes shine {
+    0% { left: -50%; }
+    50% { left: 50%; }
+    100% { left: -50%; }
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: black;
+    color: white;
+}
+
+.content { min-height: calc(100vh - 120px); }
+
+.wave-rect {
+    position: relative;
+    width: 100%;
+    padding-block: 76px;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.wave-rect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: 
+            linear-gradient(120deg,
+            var(--background-gradient-start),
+            var(--background-gradient-middle),
+            var(--background-gradient-end));
+    background-size: 200% 200%;
+    animation: 
+            gradientBackground 12s ease infinite, 
+            waveTop 8s cubic-bezier(0.3, 1, 0.6, 1) infinite, 
+            wave 8s ease-in-out infinite;
+    z-index: 1;
+}
+
+.wave-rect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, var(--footer-accent), transparent);
+    opacity: 0.4;
+    transform: skewX(-90deg);
+    animation: 
+            shine 6s ease-in-out infinite, 
+            waveTop 10s cubic-bezier(0.25, 1, 0.5, 1) infinite, wave 10s ease-in-out infinite;
+    z-index: 2;
+}
+
+.wave-rect .container {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    gap: 20px;
+    text-align: center;
+}
