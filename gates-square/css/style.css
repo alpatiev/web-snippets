@@ -1,0 +1,70 @@
+:root {
+    --scheme-content-gates-background: #000;
+    --scheme-content-gates-primary: #2449c4;
+    --scheme-content-gates-reflect: #0005;
+}
+
+.gates-component * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.gates-component {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: var(--scheme-content-gates-background, #000);
+}
+
+.gates-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    -webkit-box-reflect: below 2px linear-gradient(transparent, var(--scheme-content-gates-reflect, #0005));
+}
+
+.gates-container .gates-box {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(
+        45deg,
+        var(--scheme-content-gates-primary) 10%,
+        transparent 10%,
+        transparent 50%,
+        var(--scheme-content-gates-primary) 50%,
+        var(--scheme-content-gates-primary) 60%,
+        transparent 60%,
+        transparent 100%
+    );
+    background-size: 40px 40px;
+    transform: rotate(calc(var(--i) * 90deg));
+    animation: gates-animate 1s linear infinite;
+}
+
+@keyframes gates-animate {
+    0% {
+        background-position: 0;
+    }
+    100% {
+        background-position: 40px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .gates-container .gates-box {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .gates-container .gates-box {
+        width: 150px;
+        height: 150px;
+    }
+}
